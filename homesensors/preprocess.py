@@ -3,7 +3,7 @@ from datetime import datetime
 import numpy as np
 
 def timestamp_to_day(ts):
-    dt = datetime.fromtimestamp(ts // 1000000000)
+    dt = datetime.fromtimestamp(int(ts) // 1000000000)
     return dt.strftime('%Y-%m-%d')
 
 def csv_2_days_map(filename):
@@ -17,7 +17,7 @@ def csv_2_days_map(filename):
             else:
                 nb_lines = nb_lines + 1
                 entries = line.split(',')
-                day_name = timestamp_to_day(int(entries[1]))
+                day_name = timestamp_to_day(entries[1])
                 if(not day_name in days):
                     days[day_name] = {}
                     days[day_name]["timestamp"] = []
@@ -26,7 +26,7 @@ def csv_2_days_map(filename):
                 days[day_name]["temperature"].append(entries[2])
     return days
 
-def csv_2_days_np(filename):
+def csv_2_days(filename):
     days = csv_2_days_map(filename)
     np_days = {}
     for day in days:
