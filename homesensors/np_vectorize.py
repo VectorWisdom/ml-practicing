@@ -17,8 +17,6 @@ print(df.dtypes)
 print(f"shape   : {df.shape}")
 print("head:")
 print(df.head())
-
-#%%
 v = np.vectorize(timestamp_to_day)
 df["day"] = v(df['time'])
 df.head()
