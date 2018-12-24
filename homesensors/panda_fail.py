@@ -21,6 +21,7 @@ print(dt.strftime('%Y-%m-%d'))
 #%%
 d1 = datetime.strptime('2018 05 26', '%Y %m %d')
 print(d1.strftime('%Y-%m-%d'))
+print(d1.timestamp())
 
 #%%
 def timestamp_to_day(ts):

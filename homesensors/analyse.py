@@ -5,6 +5,7 @@
 from preprocess import *
 #%%
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 filename = "C:/Users/wassfila/Projects/balcony_temperature.csv"
@@ -28,4 +29,26 @@ print(f'average = {np_days["2018-05-28"]["mean"]}')
 a = np_days["2018-05-28"]["temperature"]
 plt.hist(a, bins='auto')  # arguments are passed to np.histogram
 plt.title("Histogram with 'auto' bins")
+plt.show()
+
+#%%
+series = days_to_array(np_days)
+
+plt.plot(series["min"])
+plt.show()
+
+#%%
+df = pd.DataFrame(  {   
+                        't':series["day"], 
+                        'mean':series["mean"],
+                        'min':series["min"],
+                        'max':series["max"]
+                    })
+df.plot('t', 'min')
+plt.show()
+
+#%%
+plt.plot( 't', 'min', data=df, marker='',  color='skyblue', linewidth=2)
+plt.plot( 't', 'mean', data=df, marker='', color='olive', linewidth=4)
+plt.plot( 't', 'max', data=df, marker='', color='red', linewidth=2)
 plt.show()

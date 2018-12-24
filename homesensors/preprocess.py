@@ -40,4 +40,25 @@ def csv_2_days_np(filename):
 def days_add_params(days):
     for day in days:
         days[day]["mean"] = np.mean(days[day]["temperature"])
+        days[day]["min"] = np.amin(days[day]["temperature"])
+        days[day]["max"] = np.amax(days[day]["temperature"])
     return
+
+def days_to_array(days):
+    series = {}
+    series["day"] = []
+    series["mean"] = []
+    series["min"] = []
+    series["max"] = []
+    for day_name,day in days.items():
+        series["day"].append(datetime.strptime(day_name, '%Y-%m-%d'))
+        #series["day"].append(day_name)
+        series["mean"].append(day["mean"])
+        series["min"].append(day["min"])
+        series["max"].append(day["max"])
+    res = {}
+    res["day"]  = np.array(series["day"]).astype("datetime64")
+    res["mean"] = np.array(series["mean"]).astype("float")
+    res["min"]  = np.array(series["min"]).astype("float")
+    res["max"]  = np.array(series["max"]).astype("float")
+    return res
