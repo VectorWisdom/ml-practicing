@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 #%%
-filename = "../balcony_temperature.csv"
+filename = "balcony_temperature.csv"
 days = csv_2_days(filename)
 print(f"loaded {len(days)} days")
 #%%

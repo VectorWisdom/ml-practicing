@@ -1,4 +1,11 @@
 # ml
+
+## Projects
+* dynamic control learning [gzrover framework](https://github.com/Roblibs/gzrover)
+* energy model control : temperature and environment sensors network for automated control and monitoring
+* code analysis : parsing, clusturing and learning from other codes experience
+
+
 ## Deep learning
 Machine learning practicing, focus on popular platform
 * TensorFlow
