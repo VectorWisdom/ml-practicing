@@ -38,10 +38,29 @@ print(df["2018-06-27":"2018-06-28"].count())
 print(df["2018-06-29"].count())
 print(df["2018-06-27":"2018-06-27 00:30"])
 #%%
-df["2018-06-27":"2018-07-10"].plot()
+df["2018-06-27":"2018-07-10"].plot(figsize=(10,5))
 #%%
-oneday = df["2018-08-01"]
-oneday.plot(alpha=0.5, style='-')
-oneday.resample('H').mean().plot(style=':')
-oneday.asfreq('H').plot(style='--')
+#plt.rcParams['figure.figsize'] = [200, 100]
+#%%
+fewdays = df["2018-08-01":"2018-08-3"]
+fewdays.plot(alpha=0.5, style='-',figsize=(20,10))
+fewdays.resample('2 H').mean().plot(style=':')
+fewdays.asfreq('2 H').plot(style='--')
 plt.legend(['input', 'resample', 'asfreq'],loc='upper left')
+
+#%%
+rolling = fewdays.rolling('2 H')
+
+data = pd.DataFrame({'input': fewdays,
+                     'few days rolling_mean': rolling.mean()})
+ax = data.plot(style=['-', '--'], figsize=(20,10))
+ax.lines[0].set_alpha(0.3)
+#%%
+#rolling = fewdays.rolling(20, center=True)
+rolling = fewdays.rolling('2 H')
+
+data = pd.DataFrame({'input': fewdays,
+                     'few days rolling_mean': rolling.mean(),
+                     'few days rolling_std': rolling.std()})
+ax = data.plot(style=['-', '--', ':'], figsize=(20,10))
+ax.lines[0].set_alpha(0.3)
